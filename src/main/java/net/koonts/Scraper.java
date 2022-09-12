@@ -21,6 +21,8 @@ public class Scraper {
     String searchTerm = "";
     int minPrice = 2000;
     int maxPrice = 10000;
+    int minYear = 2005;
+    int maxYear = 2015;
     String makeModel = "";
 
 

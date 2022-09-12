@@ -17,15 +17,15 @@ public class AtlantaCraigslist {
     String searchQuery = "";
     ArrayList<String[]> results = new ArrayList<>();
 
-    public AtlantaCraigslist(String searchTerm, String makeModel, int minPrice, int maxPrice) throws IOException {
-        scrape(searchTerm, makeModel, minPrice, maxPrice);
+    public AtlantaCraigslist(String searchTerm, String makeModel, int minPrice, int maxPrice, int minYear, int maxYear) throws IOException {
+        scrape(searchTerm, makeModel, minPrice, maxPrice, minYear, maxYear);
     }
 
     public ArrayList<String[]> getResults() {
         return results;
     }
 
-    public void scrape(String searchTerm, String makeModel, int minPrice, int maxPrice) throws IOException {
+    public void scrape(String searchTerm, String makeModel, int minPrice, int maxPrice, int minYear, int maxYear) throws IOException {
         searchTerm = URLEncoder.encode(searchTerm, "UTF-8");
         searchQuery = searchTerm+"&min_price="+minPrice+"&max_price="+maxPrice+"&auto_make_model="+makeModel;
         searchURL += searchQuery;
