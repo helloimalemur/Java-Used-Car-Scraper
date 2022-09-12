@@ -44,7 +44,15 @@ public class Scraper {
 
     public void asdf() throws IOException {
         AtlantaCraigslist atlantaCraigslist = new AtlantaCraigslist(this.searchTerm, this.makeModel, this.minPrice,this.maxPrice);
-        System.out.println(atlantaCraigslist.getResults());
+        for (int i=0;i<atlantaCraigslist.getResults().size();i++) {
+            for (int j=0;j<atlantaCraigslist.getResults().get(i).length;j++) {
+                //list each entry of Strings[] in each pos of results
+                //results[string[]]
+                System.out.println(atlantaCraigslist.getResults().get(i)[j]);
+            }
+
+        }
+
     }
 
 }
