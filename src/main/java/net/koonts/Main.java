@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         Scraper scraper = new Scraper("miata");
-        scraper.scrape();
+        scraper.asdf();
         //System.out.println("test");
     }
 }
