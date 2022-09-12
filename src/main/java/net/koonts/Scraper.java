@@ -11,6 +11,7 @@ import net.sourceforge.htmlunit.cyberneko.HTMLElements;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -43,6 +44,7 @@ public class Scraper {
 
     public void asdf() throws IOException {
         AtlantaCraigslist atlantaCraigslist = new AtlantaCraigslist(this.searchTerm, this.makeModel, this.minPrice,this.maxPrice);
+        System.out.println(atlantaCraigslist.getResults());
     }
 
 }
