@@ -16,20 +16,37 @@ import java.util.List;
 public class Scraper {
     //https://atlanta.craigslist.org/search/cta?query=miata&min_price=&max_price=&auto_make_model=mazda
     String searchQuery;
-    String searchTerm = "miata";
-    String minPrice = "4000";
-    String maxPrice = "10000";
-    String makeModel = "mazda";
+    String searchTerm = "";
+    int minPrice = 2000;
+    int maxPrice = 10000;
+    String makeModel = "";
 
     String searchURL = "https://atlanta.craigslist.org/search/cta?query=";
 
-    Scraper() throws UnsupportedEncodingException {
+
+    Scraper(String searchTerm) {
+        super();
+        this.searchTerm = searchTerm;
+    }
+    Scraper(String searchTerm, String makeModel) {
+        super();
+        this.searchTerm = searchTerm;
+        this.makeModel = makeModel;
+    }
+    Scraper(String searchTerm, String makeModel, int minPrice, int maxPrice) {
+        super();
+        this.searchTerm = searchTerm;
+        this.makeModel = makeModel;
+        this.minPrice = minPrice;
+        this.maxPrice = maxPrice;
+    }
+
+
+    public void scrape() throws IOException {
         searchTerm = URLEncoder.encode(searchTerm, "UTF-8");
         searchQuery = searchTerm+"&min_price="+minPrice+"&max_price="+maxPrice+"&auto_make_model="+makeModel;
         searchURL += searchQuery;
-    }
 
-    public void scrape() throws IOException {
         WebClient webClient = new WebClient();
         webClient.getOptions().setCssEnabled(false);
         webClient.getOptions().setJavaScriptEnabled(false);
