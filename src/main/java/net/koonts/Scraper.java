@@ -14,29 +14,48 @@ import java.util.List;
 
 
 public class Scraper {
-    String searchQuery = "miata";
+    //https://atlanta.craigslist.org/search/cta?query=miata&min_price=&max_price=&auto_make_model=mazda
+    String searchQuery;
+    String searchTerm = "miata";
+    String minPrice = "4000";
+    String maxPrice = "10000";
+    String makeModel = "mazda";
+
     String searchURL = "https://atlanta.craigslist.org/search/cta?query=";
 
-    Scraper() {
-
+    Scraper() throws UnsupportedEncodingException {
+        searchTerm = URLEncoder.encode(searchTerm, "UTF-8");
+        searchQuery = searchTerm+"&min_price="+minPrice+"&max_price="+maxPrice+"&auto_make_model="+makeModel;
+        searchURL += searchQuery;
     }
 
     public void scrape() throws IOException {
         WebClient webClient = new WebClient();
         webClient.getOptions().setCssEnabled(false);
         webClient.getOptions().setJavaScriptEnabled(false);
-        searchURL += URLEncoder.encode(searchQuery, "UTF-8");
         HtmlPage page = webClient.getPage(searchURL);
+        System.out.println(searchURL);
+
+        List<DomElement> resultHeading = page.getByXPath("//h3[@class='result-heading']");
+        List<DomText> resultLink = page.getByXPath("//a[@class='result-title']/text()");
+        List<DomText> resultPrice = page.getByXPath("//span[@class='result-price']/text()");
+
+        if (!resultPrice.isEmpty()) {
+            int size = resultPrice.size();
+            int index = 0;
 
 
-        List<HtmlDivision> divs = page.getByXPath("//div[@class='result-info']");
-
-        if (!divs.isEmpty()) {
-            for (HtmlDivision div: divs) {
-                HtmlDivision resultprice = (HtmlDivision) div.getFirstByXPath("span[@class='result-price']");
-                System.out.println(div);
-                //System.out.println(resultprice.getTextContent());
+            for (int i=0;i<resultHeading.size();i++) {
+                if (resultHeading.get(i).getFirstElementChild().getTextContent().contains(searchTerm.substring(1))) {
+                    System.out.println(resultHeading.get(i).getFirstElementChild().getTextContent());
+                    System.out.println(resultHeading.get(i).getParentNode().getFirstByXPath("//span[@class='result-price']/text()").toString());
+                } else {
+                    System.out.println("isempty");
+                }
             }
+
+
+
         }
 
     }
