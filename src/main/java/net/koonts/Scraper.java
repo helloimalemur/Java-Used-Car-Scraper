@@ -6,6 +6,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import net.koonts.scrapesource.AtlantaCraigslist;
+import net.koonts.scrapesource.AutoTrader;
 import net.sourceforge.htmlunit.cyberneko.HTMLElements;
 
 import java.io.IOException;
@@ -42,15 +43,24 @@ public class Scraper {
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
     }
+    Scraper(String searchTerm, String makeModel, int minPrice, int maxPrice, int minYear, int maxYear) {
+        super();
+        this.searchTerm = searchTerm;
+        this.makeModel = makeModel;
+        this.minPrice = minPrice;
+        this.maxPrice = maxPrice;
+        this.minYear = minYear;
+        this.maxYear = maxYear;
+    }
 
 
     public void asdf() throws IOException {
-        AtlantaCraigslist atlantaCraigslist = new AtlantaCraigslist(this.searchTerm, this.makeModel, this.minPrice,this.maxPrice);
-        for (int i=0;i<atlantaCraigslist.getResults().size();i++) {
-            for (int j=0;j<atlantaCraigslist.getResults().get(i).length;j++) {
+        AutoTrader autoTrader = new AutoTrader(this.searchTerm, this.makeModel, this.minPrice,this.maxPrice, this.minYear, this.maxYear);
+        for (int i=0;i<autoTrader.getResults().size();i++) {
+            for (int j=0;j<autoTrader.getResults().get(i).length;j++) {
                 //list each entry of Strings[] in each pos of results
                 //results[string[]]
-                System.out.println(atlantaCraigslist.getResults().get(i)[j]);
+                System.out.println(autoTrader.getResults().get(i)[j]);
             }
 
         }
