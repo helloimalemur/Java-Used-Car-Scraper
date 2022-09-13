@@ -35,26 +35,29 @@ public class AutoTrader {
         //System.out.println(searchURL);
 
         //get data from page
-        List<DomElement> resultHeading = page.getByXPath("//h3[@class='result-heading']");
+        List<DomElement> resultHeading = page.getByXPath("//div[@class='display-flex']");
         List<DomText> resultLink = page.getByXPath("//a[@class='result-title']/text()");
-        List<DomText> resultPrice = page.getByXPath("//span[@class='result-price']/text()");
+        List<DomText> resultPrice = page.getByXPath("//span[@class='first-price']/text()");
 
         //check results are not empty
         if (!resultPrice.isEmpty()) {
+
             int size = resultPrice.size();
             int index = 0;
-
+            System.out.println("total heading: "+resultHeading.size());
+            System.out.println("total price: "+resultPrice.size());
             //create string array and pack each entry
             //strings[0] = listing title
             //strings[1] = listing price
             for (int i=0;i<resultHeading.size();i++) {
                 String[] strings = new String[2];
-                if (resultHeading.get(i).getFirstElementChild().getTextContent().contains(searchTerm.substring(1))) {
+                if (true) {
+                    //resultHeading.get(i).getFirstElementChild().getTextContent().contains(searchTerm.substring(1))
                     //System.out.println(resultHeading.get(i).getFirstElementChild().getTextContent());
                     strings[0] = resultHeading.get(i).getFirstElementChild().getTextContent();
                     //results.add(i,resultHeading.get(i).getFirstElementChild().getTextContent());
                     //System.out.println(resultHeading.get(i).getParentNode().getFirstByXPath("//span[@class='result-price']/text()").toString());
-                    strings[1] = resultHeading.get(i).getParentNode().getFirstByXPath("//span[@class='result-price']/text()").toString();
+                    strings[1] = resultHeading.get(i).getParentNode().getFirstByXPath("//span[@class='result-price']/text()");
                     //results.add(i,resultHeading.get(i).getParentNode().getFirstByXPath("//span[@class='result-price']/text()").toString());
                     index++;
                 }
