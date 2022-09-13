@@ -65,7 +65,7 @@ public class AutoTrader {
                 results.add(i, strings);
 
             }
-            //remote any null entries
+            //remove any null entries
             for (int i=0;i<results.size();i++) {
                 if (results.get(i)[0]==null) {
                     results.remove(i);
