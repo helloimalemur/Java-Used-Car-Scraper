@@ -8,7 +8,6 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class AutoTrader {
@@ -17,7 +16,7 @@ public class AutoTrader {
     ArrayList<String[]> results = new ArrayList<>();
     String url = "https://www.autotrader.com/cars-for-sale/cars-between-5000-and-12000/mazda/mx-5-miata/acworth-ga-30101?requestId=d&dma=&searchRadius=300&priceRange=&location=&marketExtension=include&startYear=2005&endYear=2015&sellerTypes=d&isNewSearch=true&showAccelerateBanner=false&sortBy=relevance&numRecords=25";
     ArrayList<String> prices = new ArrayList<>();
-    int priceIndex = 0;
+    int listingIndex = 0;
     ArrayList<String> heading = new ArrayList<>();
     ArrayList<String> location = new ArrayList<>();
 
@@ -43,8 +42,9 @@ public class AutoTrader {
 
         //get listing body by class
         Elements elements = page.getElementsByClass("inventory-listing-body");
-        for (Element element: elements) {//get price for each listing
-            prices.add(priceIndex, element.getElementsByClass("first-price").text());
+        for (Element element: elements) {
+            heading.add(listingIndex, element.getElementsByAttributeValue("data-cmp","subheading").text());
+            prices.add(listingIndex, element.getElementsByClass("first-price").text());//get price for each listing
         }
 //        for () {}
         System.out.println(prices);
@@ -69,8 +69,7 @@ public class AutoTrader {
                 if (true) {
 
                     strings[0] = prices.get(i);
-
-//                    strings[1] = prices.get(i);
+                    strings[1] = heading.get(i);
                     index++;
                 }
                 //add each string array to results ArrayList<String>
