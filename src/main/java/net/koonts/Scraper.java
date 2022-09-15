@@ -57,8 +57,8 @@ public class Scraper {
                 System.out.println(autoTrader.getResults().get(i)[j]);
             }
 
+            System.out.println("-------");
         }
-//        System.out.println("-------");
     }
 
 }
