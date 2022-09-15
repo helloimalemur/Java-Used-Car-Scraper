@@ -55,8 +55,11 @@ public class AutoTrader {
             }
             //price
             price.add(listingIndex, element.getElementsByClass("first-price").text());//price
-
+            //year
             year.add(listingIndex, heading.get(listingIndex).split(" ")[1]);
+            //make
+            //location
+
             listingIndex++;
         }
 
