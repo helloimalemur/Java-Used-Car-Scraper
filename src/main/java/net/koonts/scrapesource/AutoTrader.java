@@ -57,7 +57,6 @@ public class AutoTrader {
 
 
         if (!prices.isEmpty()) {
-
             int size = prices.size();
             int index = 0;
             System.out.println("total heading: "+heading.size());
