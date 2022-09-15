@@ -19,7 +19,9 @@ public class AutoTrader {
     ArrayList<String> year = new ArrayList<>();
     int listingIndex = 0;
     ArrayList<String> heading = new ArrayList<>();
-    ArrayList<String> location = new ArrayList<>();
+    ArrayList<String> distance = new ArrayList<>();
+    ArrayList<String> brand = new ArrayList<>();
+
 
 
     public AutoTrader(String searchTerm, String makeModel, int minPrice, int maxPrice, int minYear, int maxYear) throws IOException {
@@ -60,8 +62,10 @@ public class AutoTrader {
             price.add(listingIndex, element.getElementsByClass("first-price").text());//price
             //year
             year.add(listingIndex, heading.get(listingIndex).split(" ")[1]);
-            //make
+            //brand
+            brand.add(listingIndex, heading.get(listingIndex).split(" ")[2]);
             //location
+//            distance.add(listingIndex, element.getElementsByAttributeValue("data-cmp", "ownerDistance").last().text());
 
             listingIndex++;
         }
@@ -72,14 +76,15 @@ public class AutoTrader {
             System.out.println("total heading: " + heading.size());
             System.out.println("total price: " + price.size());
             //create string array and pack each entry
-//            strings[0] = listing title;
-//            strings[1] = listing price;
+
             for (int i = 0; i < price.size(); i++) {
-                String[] strings = new String[3];
+                String[] strings = new String[5];
                 if (true) {
                     strings[0] = heading.get(i);
                     strings[1] = price.get(i);
                     strings[2] = year.get(i);
+                    strings[3] = brand.get(i);
+//                    strings[4] = distance.get(i);
                     index++;
                 }
                 //add each string array to results ArrayList<String>
