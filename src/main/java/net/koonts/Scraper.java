@@ -1,13 +1,7 @@
 package net.koonts;
 
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.*;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import net.koonts.scrapesource.AtlantaCraigslist;
 import net.koonts.scrapesource.AutoTrader;
-import net.sourceforge.htmlunit.cyberneko.HTMLElements;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
