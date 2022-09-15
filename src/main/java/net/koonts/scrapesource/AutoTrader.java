@@ -15,7 +15,8 @@ public class AutoTrader {
 
     ArrayList<String[]> results = new ArrayList<>();
     String url = "https://www.autotrader.com/cars-for-sale/cars-between-5000-and-12000/mazda/mx-5-miata/acworth-ga-30101?requestId=d&dma=&searchRadius=300&priceRange=&location=&marketExtension=include&startYear=2005&endYear=2015&sellerTypes=d&isNewSearch=true&showAccelerateBanner=false&sortBy=relevance&numRecords=25";
-    ArrayList<String> prices = new ArrayList<>();
+    ArrayList<String> price = new ArrayList<>();
+    ArrayList<String> year = new ArrayList<>();
     int listingIndex = 0;
     ArrayList<String> heading = new ArrayList<>();
     ArrayList<String> location = new ArrayList<>();
@@ -30,6 +31,7 @@ public class AutoTrader {
     }
 
     public void scrape(String searchTerm, String make, int minPrice, int maxPrice, int minYear, int maxYear) throws IOException {
+        listingIndex=0;
         searchTerm = URLEncoder.encode(searchTerm, "UTF-8");
         String url = "https://www.autotrader.com/cars-for-sale/cars-between-"+minPrice+"-and-"+maxPrice+"/"+make+"/"+searchTerm+"/acworth-ga-30101?requestId=d&dma=&searchRadius=300&priceRange=&location=&marketExtension=include&startYear="+minYear+"&endYear="+maxYear+"&sellerTypes=d&isNewSearch=true&showAccelerateBanner=false&sortBy=relevance&numRecords=25";
         //create web client and set search terms
@@ -43,33 +45,35 @@ public class AutoTrader {
         //get listing body by class
         Elements elements = page.getElementsByClass("inventory-listing-body");
         for (Element element: elements) {
-            heading.add(listingIndex, element.getElementsByAttributeValue("data-cmp","subheading").text());
-            prices.add(listingIndex, element.getElementsByClass("first-price").text());//get price for each listing
+            //heading
+            if (!element.getElementsByAttributeValue("data-cmp","newlyListed").isEmpty()) {
+                heading.add(listingIndex, element.getElementsByAttributeValue("data-cmp","subheading").text()+"  --- Newly Listed");
+            } else if(!element.getElementsByAttributeValue("data-cmp","reducedPrice").isEmpty()){
+                heading.add(listingIndex, element.getElementsByAttributeValue("data-cmp","subheading").text()+"  --- Reduced Price");
+            } else {
+                heading.add(listingIndex, element.getElementsByAttributeValue("data-cmp","subheading").text());
+            }
+            //price
+            price.add(listingIndex, element.getElementsByClass("first-price").text());//price
+
+            year.add(listingIndex, heading.get(listingIndex).split(" ")[1]);
+            listingIndex++;
         }
-//        for () {}
-        System.out.println(prices);
-        try {
-            //get data from page
-
-        } catch(Exception e) {
-            System.out.println(e);
-        }
 
 
-        if (!prices.isEmpty()) {
-            int size = prices.size();
+        if (listingIndex>0) {
             int index = 0;
             System.out.println("total heading: "+heading.size());
-            System.out.println("total price: "+prices.size());
+            System.out.println("total price: "+ price.size());
             //create string array and pack each entry
 //            strings[0] = listing title;
 //            strings[1] = listing price;
-            for (int i=0;i<prices.size();i++) {
-                String[] strings = new String[2];
+            for (int i = 0; i< price.size(); i++) {
+                String[] strings = new String[3];
                 if (true) {
-
-                    strings[0] = prices.get(i);
+                    strings[0] = price.get(i);
                     strings[1] = heading.get(i);
+                    strings[2] = year.get(i);
                     index++;
                 }
                 //add each string array to results ArrayList<String>
