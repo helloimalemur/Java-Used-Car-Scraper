@@ -63,19 +63,15 @@ public class AutoTrader {
             System.out.println("total heading: "+heading.size());
             System.out.println("total price: "+prices.size());
             //create string array and pack each entry
-//            strings[0] = listing title
-//            strings[1] = listing price
+//            strings[0] = listing title;
+//            strings[1] = listing price;
             for (int i=0;i<prices.size();i++) {
                 String[] strings = new String[2];
                 if (true) {
-                    //resultHeading.get(i).getFirstElementChild().getTextContent().contains(searchTerm.substring(1))
-                    //System.out.println(resultHeading.get(i).getFirstElementChild().getTextContent());
+
                     strings[0] = prices.get(i);
-                    //results.add(i,resultHeading.get(i).getFirstElementChild().getTextContent());
-                    //System.out.println(resultHeading.get(i).getParentNode().getFirstByXPath("//span[@class='result-price']/text()").toString());
-                    strings[1] = prices.get(i);
-                    ///html/body/div[2]/div[1]/div[3]/div/div[1]/div[2]/div[2]/div[4]/div[2]/div[1]/div/div/div/div/div[1]/div[2]/div[2]/div[1]/div/div/div[1]/div[2]/div[1]/span
-                    //results.add(i,resultHeading.get(i).getParentNode().getFirstByXPath("//span[@class='result-price']/text()").toString());
+
+//                    strings[1] = prices.get(i);
                     index++;
                 }
                 //add each string array to results ArrayList<String>
