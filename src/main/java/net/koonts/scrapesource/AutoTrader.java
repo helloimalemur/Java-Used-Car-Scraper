@@ -66,7 +66,7 @@ public class AutoTrader {
             brand.add(listingIndex, heading.get(listingIndex).split(" ")[2]);
             //location
 //            distance.add(listingIndex, element.getElementsByAttributeValue("data-cmp", "ownerDistance").last().text());
-
+//            System.out.println(distance.get(listingIndex));
             listingIndex++;
         }
 
